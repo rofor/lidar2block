@@ -24,7 +24,7 @@ The code each face is structure slightly differently, I will describe the west f
 
 The first loop reads value on the current line of the file (the max z position) and generates a sequence from one to this value. Each one of these sequences represents z values for each column of the vertically stacked points on the face.
 
-The second loop reads the current line count and repeats this number this value for each of the values in the last sequence. Each of these lists of the same number represent the Y positions for each column of points on the face.
+The second loop reads the current line count and repeats this value this value for each of the values in the last sequence. Each of these lists of the same repeating value represent the Y positions for each column of points on the face.
 
 The third loop generates the X positions which are all 1.
 
