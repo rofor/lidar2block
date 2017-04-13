@@ -6,7 +6,7 @@ This is my first BASH script, so I'm sure there's plenty of room for improvement
 
 ## Description
 
-This was created in order to process UK Environment Agency LIDAR data, which is available here http://environment.data.gov.uk/ds/survey/index.jsp#/survey
+This was created in order to process UK Environment Agency LIDAR data, which is available here http://environment.data.gov.uk/ds/survey/
 
 The script converts 1m resolution ASCII grid terrain data with 2000 columns and 2000 rows into a list of XYZ co-ordinates.
 
