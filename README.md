@@ -8,7 +8,7 @@ This is my first BASH script, so I'm sure there's plenty of room for improvement
 
 This was created in order to process UK Environment Agency LIDAR data, which is available here http://environment.data.gov.uk/ds/survey/
 
-The script converts 1m resolution ASCII grid terrain data with 2000 columns and 2000 rows into a list of XYZ co-ordinates.
+The script uses gdal_translate to convert 1m resolution ASCII grid terrain data with 2000 columns and 2000 rows into a list of XYZ co-ordinates.
 
 It also generates a sea level point cloud as a base and appropriately shaped north, east, south, and west point clouds as sides.
 
