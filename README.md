@@ -28,7 +28,7 @@ The second loop reads the current line count and repeats this value for each of 
 
 The third loop generates the X positions which on the west face are all 1.
 
-The terrain point cloud and the five generated point clouds are combined together into a big list of XYZ values, and output as block.xyz.
+The terrain point cloud and the five generated point clouds are combined together into one big file with three columns called block.xyz.
 
 CloudCompare can be used to open block.xyz, and save it as a PLY mesh.
 
