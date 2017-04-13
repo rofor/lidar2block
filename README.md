@@ -18,7 +18,7 @@ This PLY mesh can then be imported into MeshLab and exported as an STL from whic
 
 ## Setup
 
-Dependencies:
+Required dependencies:
 
     gdal
     awk
@@ -26,6 +26,11 @@ Dependencies:
     paste
     sed
     cat
+
+Optional dependencies:
+
+    CloudCompare
+    MeshLab
 
 Clone this repository:
 
