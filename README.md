@@ -14,7 +14,7 @@ The aim is to create a water tight mesh cuboid the top surface of which is the i
 
 To create the top surface gdal_translate is used to convert the ASCII grid into a list of XYZ co-ordinates.
 
-The sides and base generated from the outer edge values of ASCII grid are compiled into 4 lists.
+The sides and base are generated from the outer edge values of ASCII grid are compiled into 4 lists.
 
 Theses lists represent the maximum z positions of the points on the edges of the terrain.
 
