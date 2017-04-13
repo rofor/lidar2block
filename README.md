@@ -8,7 +8,7 @@ This is my first BASH script, so I'm sure there's plenty of room for improvement
 
 This was created in order to process UK Environment Agency LIDAR data, which is available here http://environment.data.gov.uk/ds/survey/index.jsp#/survey
 
-The script converts 1m resolution ESRI grid terrain data with 2000 columns and 2000 rows into a list of XYZ co-ordinates.
+The script converts 1m resolution ASCII grid terrain data with 2000 columns and 2000 rows into a list of XYZ co-ordinates.
 
 It also generates a sea level point cloud as a base and appropriately shaped north, east, south, and west point clouds as sides.
 
@@ -16,7 +16,7 @@ The terrain point cloud and the five generated point clouds are combined togethe
 
 CloudCompare can be used to open block.xyz, and save it as a PLY mesh.
 
-This PLY mesh can then be imported into MeshLab and exported as an STL from which GCODE can be generated for 3d printing or CNC routing.
+This PLY mesh can then be imported into MeshLab and exported as an STL from which GCODE can be generated for 3d printing or CNC machining.
 
 ## Setup
 
