@@ -10,7 +10,7 @@ This was created in order to process UK Environment Agency LIDAR data, which is 
 
 The script converts 1m resolution ESRI grid terrain data with 2000 columns and 2000 rows into a list of XYZ co-ordinates.
 
-It also generates the a sea level point cloud as a base and appropriately shaped north, east, south, and west point cloud side surfaces.
+It also generates a sea level point cloud as a base and appropriately shaped north, east, south, and west point cloud side surfaces.
 
 The terrain point cloud and the five generated point clouds are combined together into a big list of XYZ values, and output as block.xyz.
 
