@@ -26,7 +26,7 @@ The first loop reads value on the current line of the file (the max z position) 
 
 The second loop reads the current line count and repeats this value for each of the values in the last sequence. Each of these lists of the same repeating value represent the Y positions for each column of points on the face.
 
-The third loop generates the X positions which are all 1.
+The third loop generates the X positions which on the west face are all 1.
 
 The terrain point cloud and the five generated point clouds are combined together into a big list of XYZ values, and output as block.xyz.
 
