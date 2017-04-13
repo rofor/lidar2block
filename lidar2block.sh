@@ -8,6 +8,16 @@
   /usr/bin/rm -rf  block.xyz ;# delete old block directory
   mkdir temp # make new temp directory
   sed -e '1,6d'  $1 > temp/matrix.xyz # strip ersi headers
+
+  ############################################ generate terrain point cloud ##########################################
+  echo " Generating terrain.."
+      sed 's/\xllcorner.*/xllcorner          1/' $1 > temp/xllcorner.asc # set xllcorner to 1
+      sed 's/\yllcorner.*/yllcorner          1/' temp/xllcorner.asc > temp/yllcorner.asc # set yllcorner to 1
+  		gdal_translate -of XYZ temp/yllcorner.asc temp/cloud.xyz # generate point cloud from raster
+  		awk '{print $1, $2, $3/1000}' temp/cloud.xyz > temp/0-terrain.xyz # divide z axis by 100 to generate terrain point cloud
+    #  cat temp/cdp.xyz | sed -re 's/([0-9]+\.[0-9]{2})[0-9]+/\1/g' > temp/0-terrain.xyz # cull all by two decimal places
+  echo "Done."
+  
 ##################################### extract terrain z for each face #################################
 echo "Extracting Z values"
 # north terrain z
@@ -74,14 +84,6 @@ for i in `seq 2000`; do echo "2000";done > temp/basez.xyz
         for i in `seq 1 1 $bline`; do echo "1";done >> temp/bz.xyz # repeat interger for every iteration of each lines sequence
     done # specify file to read
           paste -d ' ' temp/bx.xyz temp/by.xyz temp/bz.xyz > temp/0-base.xyz && # paste x, y, z into 3 columns and save
-echo "Done."
-############################################ generate terrain point cloud ##########################################
-echo " Generating terrain.."
-    sed 's/\xllcorner.*/xllcorner          1/' $1 > temp/xllcorner.asc # set xllcorner to 1
-    sed 's/\yllcorner.*/yllcorner          1/' temp/xllcorner.asc > temp/yllcorner.asc # set yllcorner to 1
-		gdal_translate -of XYZ temp/yllcorner.asc temp/cloud.xyz # generate point cloud from raster
-		awk '{print $1, $2, $3/1000}' temp/cloud.xyz > temp/0-terrain.xyz # divide z axis by 100 to generate terrain point cloud
-  #  cat temp/cdp.xyz | sed -re 's/([0-9]+\.[0-9]{2})[0-9]+/\1/g' > temp/0-terrain.xyz # cull all by two decimal places
 echo "Done."
 ################################################## generate sides point cloud #######################################
 echo "Combining.."
