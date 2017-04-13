@@ -20,7 +20,7 @@ Theses lists represent the maximum z positions of the points on the edges of the
 
 For each face a loop reads its corresponding list line by line, as this loop moves through the file three more nested loops generate the X, Y, and Z values.
 
-The code each face are structure slightly differently, I will describe the west face code.
+The code each face is structure slightly differently, I will describe the west face code.
 
 The first loop reads value on the current line of the file (the max z position) and generates a sequence from one to this value. Each one of these sequences represents z values for each column of the vertically stacked points on the face.
 
