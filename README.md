@@ -18,7 +18,7 @@ The sides and base are generated from the outer edge values of ASCII grid are co
 
 Theses lists represent the maximum z positions of the points on the edges of the terrain.
 
-For each face a loop reads its corresponding list line by line, as this loop moves through the file three more nested loops are run.
+For each face a loop reads its corresponding list line by line, as this loop moves through the file three more nested loops generate the X, Y, and Z values.
 
 The code each face are structure slightly differently, I will describe the west face code.
 
