@@ -17,7 +17,7 @@
   		awk '{print $1, $2, $3/1000}' temp/cloud.xyz > temp/0-terrain.xyz # divide z axis by 100 to generate terrain point cloud
     #  cat temp/cdp.xyz | sed -re 's/([0-9]+\.[0-9]{2})[0-9]+/\1/g' > temp/0-terrain.xyz # cull all by two decimal places
   echo "Done."
-  
+
 ##################################### extract terrain z for each face #################################
 echo "Extracting Z values"
 # north terrain z
@@ -45,7 +45,7 @@ echo "Done."
 echo "Generating faces.."
 # north face
   sed 1d temp/ntz.xyz |  while read -r nline; do  # read lines of file one by one and perform loop each time
-        seq 1 1 $nline >> temp/nz.xyz   # generate sequence of number whos maximum is the value of the current line
+        seq 1 1 $nline >> temp/nz.xyz   # generate sequence of numbers whos maximum is the value of the current line
         nvar=$((nvar+1))   # count current file line
         for i in `seq 1 1 $nline`; do echo "$nvar";done >> temp/nx.xyz # repeat current line number for every iteration of each lines sequence
         for i in `seq 1 1 $nline`; do echo "2000";done >> temp/ny.xyz # repeat interger for every iteration of each lines sequence
@@ -53,7 +53,7 @@ echo "Generating faces.."
           paste -d ' ' temp/nx.xyz temp/ny.xyz temp/nz.xyz > temp/n.xyz # paste x, y, z into 3 columns and save
 # east face
     sed 1d temp/etz.xyz | while read -r eline; do  # read lines of file one by one and perform loop each time
-        seq 1 1 $eline >> temp/ez.xyz   # generate sequence of number whos maximum is the value of the current line
+        seq 1 1 $eline >> temp/ez.xyz   # generate sequence of numbers whos maximum is the value of the current line
         evar=$((evar+1))   # count current file line
         for i in `seq 1 1 $eline`; do echo "$evar";done >> temp/ey.xyz # repeat current line number for every iteration of each lines sequence
         for i in `seq 1 1 $eline`; do echo "2000";done >> temp/ex.xyz # repeat interger for every iteration of each lines sequence
@@ -61,7 +61,7 @@ echo "Generating faces.."
           paste -d ' ' temp/ex.xyz temp/ey.xyz temp/ez.xyz > temp/e.xyz # paste x, y, z into 3 columns and save
 # south face
     sed 1d temp/stz.xyz | while read -r sline; do  # read lines of file one by one and perform loop each time
-        seq 1 1 $sline >> temp/sz.xyz   # generate sequence of number whos maximum is the value of the current line
+        seq 1 1 $sline >> temp/sz.xyz   # generate sequence of numbers whos maximum is the value of the current line
         svar=$((svar+1))   # count current file line
         for i in `seq 1 1 $sline`; do echo "$svar";done >> temp/sx.xyz # repeat current line number for every iteration of each lines sequence
         for i in `seq 1 1 $sline`; do echo "1";done >> temp/sy.xyz # repeat interger for every  iteration of each lines sequence
