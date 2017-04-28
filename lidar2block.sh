@@ -5,7 +5,7 @@
 # ncols + nrows variables, to allow input of ASCII files of varying dimensions, clipped in qgis
 
 ################################################## prep ###############################################
-  /usr/bin/rm -rf  block.xyz ;# delete old block directory
+  /usr/bin/rm -rf  block.xyz ;# delete old block file
   mkdir temp # make new temp directory
   sed -e '1,6d'  $1 > temp/matrix.xyz # strip ersi headers
 
