@@ -1,5 +1,6 @@
+#!/bin/python
 
-import os, gdal
+import os, gdal, osgeo
 
 in_path = '~/lidar2block'
 input_filename = 'st8991_DTM_1M.asc'
