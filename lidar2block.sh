@@ -8,7 +8,7 @@
 ################################################## prep ###############################################
   rm -rf -R temp ;# delete old temp directory
   mkdir temp # make new temp directory
-  size=$(head -n 1 st8991_DTM_1M.asc | grep -o '[0-9]\+')
+  size=$(head -n 1 $1 | grep -o '[0-9]\+')
   sed -e '1,6d'  $1 > temp/matrix.xyz # strip ersi headers
 
   ############################################ generate terrain point cloud ##########################################
