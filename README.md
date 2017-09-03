@@ -28,22 +28,22 @@ The second loop reads the current line count and repeats this value for each of 
 
 The third loop generates the X positions which on the west face are all 1.
 
-The terrain point cloud and the five generated point clouds are combined together into one big file with three columns called block.xyz.
+The terrain point cloud and the five generated point clouds are combined together into one big file with three columns called /temp/block.xyz.
 
-CloudCompare can be used to open block.xyz, and save it as a PLY mesh.
+Finally Meshlabs command line utility meshlabserver is then used in combination with a MLX script to generate a water tight mesh from the point cloud. First Poisson-disk Sampling, then Delete Current Mesh, leaving only the newly created mesh, then Surface Reconstruction: Ball Pivoting, and lastly Close Holes.
 
-This PLY mesh can then be imported into MeshLab and exported as an STL from which GCODE can be generated for 3d printing or CNC machining.
+## Notes
+
+* Currently the dimensions of the ASCII grid need to be set manually inside the script, they're currently set to 1000.
+
+* I've included some miscellaneous scripts splitting up both large .asc fiels and large .tif with a 10 by 10 grid to produce 100 smaller files. Thus the standard 10km by 10km survey data can be broken down into individual kilometers.
 
 ## Setup
 
 Required dependencies:
 
     gdal
-
-Optional dependencies:
-
-    CloudCompare
-    MeshLab
+    meshlab
 
 Clone this repository:
 

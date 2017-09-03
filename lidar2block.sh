@@ -1,8 +1,9 @@
 #!/bin/bash
 
-#### to do ########
-# thinning variable for faces + base
-# ncols + nrows variables, to allow input of ASCII files of varying dimensions, clipped in qgis
+#####
+# Dependancies;
+# gdal
+# meshlab
 
 ################################################## prep ###############################################
   /usr/bin/rm -rf  block.xyz ;# delete old block file
@@ -13,8 +14,8 @@
   echo " Generating terrain.."
       sed 's/\xllcorner.*/xllcorner          1/' $1 > temp/xllcorner.asc # set xllcorner to 1
       sed 's/\yllcorner.*/yllcorner          1/' temp/xllcorner.asc > temp/yllcorner.asc # set yllcorner to 1
-  		gdal_translate -of XYZ temp/yllcorner.asc temp/cloud.xyz # generate point cloud from raster
-  		awk '{print $1, $2, $3/1000}' temp/cloud.xyz > temp/0-terrain.xyz # divide z axis by 100 to generate terrain point cloud
+  		gdal_translate -of XYZ temp/yllcorner.asc temp/0-terrain.xyz # generate point cloud from raster
+  	#	awk '{print $1, $2, $3/1000}' temp/cloud.xyz > temp/ # divide z axis by 100 to generate terrain point cloud
     #  cat temp/cdp.xyz | sed -re 's/([0-9]+\.[0-9]{2})[0-9]+/\1/g' > temp/0-terrain.xyz # cull all by two decimal places
   echo "Done."
 
@@ -22,24 +23,24 @@
 echo "Extracting Z values"
 # north terrain z
   head -n1 temp/matrix.xyz > temp/fr.xyz # print first row of matrix #
-    tr -s ' '  '\n' < temp/fr.xyz > temp/ntzm.xyz # transpose row to column
-        awk '{print $1/1000}' temp/ntzm.xyz > temp/ntzf.xyz # scale
-          awk -F. '{print $1}' temp/ntzf.xyz > temp/ntz.xyz # cull float
+    tr -s ' '  '\n' < temp/fr.xyz > temp/ntz.xyz # transpose row to column
+    #    awk '{print $1/1000}' temp/ntzm.xyz > temp/ntzf.xyz # scale
+    #      awk -F. '{print $1}' temp/ntzf.xyz > temp/ntz.xyz # cull float
 # east terrain z
   awk '{print $(NF-1)}' temp/matrix.xyz > temp/etzm.xyz # print second from last column of matrix
-      awk '{print $1/1000}' temp/etzm.xyz > temp/etzf.xyz # scale
-        awk -F. '{print $1}' temp/etzf.xyz > temp/etzr.xyz # cull float
-          tac temp/etzr.xyz > temp/etz.xyz # reverse list
+    #  awk '{print $1/1000}' temp/etzm.xyz > temp/etzf.xyz # scale
+    #    awk -F. '{print $1}' temp/etzf.xyz > temp/etzr.xyz # cull float
+          tac temp/etzm.xyz > temp/etz.xyz # reverse list
 # south terrain z
     tail -n1 temp/matrix.xyz > temp/lr.xyz # print last row of matrix
-      tr -s ' '  '\n' < temp/lr.xyz > temp/stzm.xyz # transpose row to column
-          awk '{print $1/1000}' temp/stzm.xyz > temp/stzf.xyz # scale
-            awk -F. '{print $1}' temp/stzf.xyz > temp/stz.xyz # cull float
+      tr -s ' '  '\n' < temp/lr.xyz > temp/stz.xyz # transpose row to column
+      #    awk '{print $1/1000}' temp/stzm.xyz > temp/stzf.xyz # scale
+      #      awk -F. '{print $1}' temp/stzf.xyz > temp/stz.xyz # cull float
 # west terrain z
     awk '{print $1}' temp/matrix.xyz > temp/wtzm.xyz # print first column of matrix
-        awk '{print $1/1000}' temp/wtzm.xyz > temp/wtzf.xyz # scale
-          awk -F. '{print $1}' temp/wtzf.xyz > temp/wtzr.xyz # cull float
-            tac temp/wtzr.xyz > temp/wtz.xyz # reverse list
+#        awk '{print $1/1000}' temp/wtzm.xyz > temp/wtzf.xyz # scale
+  #        awk -F. '{print $1}' temp/wtzf.xyz > temp/wtzr.xyz # cull float
+            tac temp/wtzm.xyz > temp/wtz.xyz # reverse list
 echo "Done."
 ############################################### generate faces #######################################
 echo "Generating faces.."
@@ -48,7 +49,7 @@ echo "Generating faces.."
         seq 1 1 $nline >> temp/nz.xyz   # generate sequence of numbers whos maximum is the value of the current line
         nvar=$((nvar+1))   # count current file line
         for i in `seq 1 1 $nline`; do echo "$nvar";done >> temp/nx.xyz # repeat current line number for every iteration of each lines sequence
-        for i in `seq 1 1 $nline`; do echo "2000";done >> temp/ny.xyz # repeat interger for every iteration of each lines sequence
+        for i in `seq 1 1 $nline`; do echo "1000";done >> temp/ny.xyz # repeat interger for every iteration of each lines sequence
     done  # specify file to read
           paste -d ' ' temp/nx.xyz temp/ny.xyz temp/nz.xyz > temp/n.xyz # paste x, y, z into 3 columns and save
 # east face
@@ -56,7 +57,7 @@ echo "Generating faces.."
         seq 1 1 $eline >> temp/ez.xyz   # generate sequence of numbers whos maximum is the value of the current line
         evar=$((evar+1))   # count current file line
         for i in `seq 1 1 $eline`; do echo "$evar";done >> temp/ey.xyz # repeat current line number for every iteration of each lines sequence
-        for i in `seq 1 1 $eline`; do echo "2000";done >> temp/ex.xyz # repeat interger for every iteration of each lines sequence
+        for i in `seq 1 1 $eline`; do echo "1000";done >> temp/ex.xyz # repeat interger for every iteration of each lines sequence
     done  # specify file to read
           paste -d ' ' temp/ex.xyz temp/ey.xyz temp/ez.xyz > temp/e.xyz # paste x, y, z into 3 columns and save
 # south face
@@ -76,7 +77,7 @@ echo "Generating faces.."
     done # specify file to read
           paste -d ' ' temp/wx.xyz temp/wy.xyz temp/wz.xyz > temp/w.xyz # paste x, y, z into 3 columns and save
 # base
-for i in `seq 2000`; do echo "2000";done > temp/basez.xyz
+for i in `seq 1000`; do echo "1000";done > temp/basez.xyz
     sed 1d temp/basez.xyz | while read -r bline; do  # read lines of file one by one and perform loop each time
         seq 1 1 $bline >> temp/bx.xyz   # generate sequence of number whos maximum is the value of the current line
         bvar=$((bvar+1))   # count current file line
@@ -88,9 +89,12 @@ echo "Done."
 ################################################## generate sides point cloud #######################################
 echo "Combining.."
     cat temp/n.xyz temp/e.xyz temp/s.xyz temp/w.xyz > temp/0-sides.xyz # combine faces
-    cat temp/0-base.xyz temp/0-sides.xyz  temp/0-terrain.xyz > block.xyz # combine to block
+    cat temp/0-base.xyz temp/0-sides.xyz  temp/0-terrain.xyz > temp/block.xyz # combine to block
 echo "Done"
-################################################### clean up ##########################################################
-  /usr/bin/rm -rf -R temp ;# delete temp directory
-echo "All done. Now import block.xyz into CloudCompare, save as block.ply (binary), then import into MeshLab and save as block.stl (binary)"
 ########################################################################################################################
+echo "Generating mesh"
+v=$1 # define standard input as v
+v2=${v::-4} # define v2 aS v minus 4 characters
+meshlabserver -i temp/block.xyz -o  $v2.stl -s /xyz2stl1000.mlx
+################################################### clean up ##########################################################
+ /usr/bin/rm -rf -R temp ;# delete temp directory
