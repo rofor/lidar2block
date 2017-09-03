@@ -30,7 +30,7 @@ echo "Extracting Z values"
   awk '{print $(NF-1)}' temp/matrix.xyz > temp/etzm.xyz # print second from last column of matrix
     #  awk '{print $1/1000}' temp/etzm.xyz > temp/etzf.xyz # scale
     #    awk -F. '{print $1}' temp/etzf.xyz > temp/etzr.xyz # cull float
-          sed '1!G;h;$!d' ${temp/etzm.xyz}  > temp/etz.xyz # reverse list
+          awk '{a[i++]=$0} END {for (j=i-1; j>=0;) print a[j--] }' temp/etzm.xyz  > temp/etz.xyz # reverse list
 # south terrain z
     tail -n1 temp/matrix.xyz > temp/lr.xyz # print last row of matrix
       tr -s ' '  '\n' < temp/lr.xyz > temp/stz.xyz # transpose row to column
@@ -40,7 +40,7 @@ echo "Extracting Z values"
     awk '{print $1}' temp/matrix.xyz > temp/wtzm.xyz # print first column of matrix
 #        awk '{print $1/1000}' temp/wtzm.xyz > temp/wtzf.xyz # scale
   #        awk -F. '{print $1}' temp/wtzf.xyz > temp/wtzr.xyz # cull float
-            sed '1!G;h;$!d' ${temp/wtzm.xyz} > temp/wtz.xyz # reverse list
+            awk '{a[i++]=$0} END {for (j=i-1; j>=0;) print a[j--] }' temp/wtzm.xyz > temp/wtz.xyz # reverse list
 echo "Done."
 ############################################### generate faces #######################################
 echo "Generating faces.."
