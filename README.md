@@ -45,11 +45,9 @@ Required dependencies:
     gdal
     meshlab
 
-Clone this repository:
+## Usage
 
     git clone https://github.com/rofor/lidar2block.git
     cd lidar2block
-
-Run the script:
-
-    lidar2block.sh /path/to/file.asc
+    chmod a+x lidar2block.sh
+    sh lidar2block.sh /path/to/file.asc
