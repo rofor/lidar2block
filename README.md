@@ -2,7 +2,7 @@
 
 # lidar2block
 
-This is my first BASH script, so I'm sure there's plenty of room for improvement, suggestions welcome!
+This is my first BASH script, so I'm sure there's plenty of room for improvement, suggestions welcome! So far I've only tested it on Arch linux.
 
 ## Description
 
