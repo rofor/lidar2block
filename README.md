@@ -18,12 +18,12 @@ The aim is to create a water tight mesh cuboid the top surface of which is the i
 
 Arch linux specific;
 
-    yaourt -S --noconfirm gdal meshlab imagemagick
+    yaourt -S --noconfirm gdal meshlab
 
 Mac OSX specific;
 
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null ; brew install caskroom/cask/brew-cask 2> /dev/null
-    brew install gdal imagemagick
+    brew install gdal
     brew cask install meshlab
 
 Then;
