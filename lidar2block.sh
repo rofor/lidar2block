@@ -89,6 +89,6 @@ echo "Done"
 ########################################################################################################################
 echo "Generating mesh"
 sed 's/.\{4\}$//' <<< "$1" # minus 4 characters
-meshlabserver -i temp/block.xyz -o  mesh-$name.stl -s meshlab-script.mlx || /Applications/meshlab.app/Contents/MacOS/meshlabserver -i temp/block.xyz -o  mesh-$name.stl -s meshlab-script.mlx
+meshlabserver -i temp/block.xyz -o  mesh-$name.stl -s meshlab_script.mlx || /Applications/meshlab.app/Contents/MacOS/meshlabserver -i temp/block.xyz -o  mesh-$name.stl -s meshlab_script.mlx
 ################################################### clean up ##########################################################
  rm -rf -R temp ;# delete temp directory
