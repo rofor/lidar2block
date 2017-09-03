@@ -8,7 +8,7 @@
 ################################################## prep ###############################################
   /usr/bin/rm -rf  block.xyz ;# delete old block file
   mkdir temp # make new temp directory
-  size=$(grep -om1 '[0-9]\+' $1)
+  size=$(head -n 1 st8991_DTM_1M.asc | grep -o '[0-9]\+')
   sed -e '1,6d'  $1 > temp/matrix.xyz # strip ersi headers
 
   ############################################ generate terrain point cloud ##########################################
@@ -94,8 +94,7 @@ echo "Combining.."
 echo "Done"
 ########################################################################################################################
 echo "Generating mesh"
-v=$1 # define standard input as v
-v2=${v::-4} # define v2 aS v minus 4 characters
-meshlabserver -i temp/block.xyz -o  $v2.stl -s meshlab-script.mlx || /Applications/meshlab.app/Contents/MacOS/meshlabserver -i temp/block.xyz -o  $v2.stl -s meshlab-script.mlx
+sed 's/.\{4\}$//' <<< "$1" # minus 4 characters
+meshlabserver -i temp/block.xyz -o  mesh-$name.stl -s meshlab-script.mlx || /Applications/meshlab.app/Contents/MacOS/meshlabserver -i temp/block.xyz -o  mesh-$name.stl -s meshlab-script.mlx
 ################################################### clean up ##########################################################
  rm -rf -R temp ;# delete temp directory
