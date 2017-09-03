@@ -96,6 +96,6 @@ echo "Done"
 echo "Generating mesh"
 v=$1 # define standard input as v
 v2=${v::-4} # define v2 aS v minus 4 characters
-meshlabserver -i temp/block.xyz -o  $v2.stl -s /xyz2stl1000.mlx || /Applications/meshlab.app/Contents/MacOS/meshlabserver -i temp/block.xyz -o  $v2.stl -s /xyz2stl1000.mlx
+meshlabserver -i temp/block.xyz -o  $v2.stl -s meshlab-script.mlx || /Applications/meshlab.app/Contents/MacOS/meshlabserver -i temp/block.xyz -o  $v2.stl -s meshlab-script.mlx
 ################################################### clean up ##########################################################
  rm -rf -R temp ;# delete temp directory
