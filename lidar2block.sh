@@ -6,7 +6,7 @@
 # meshlab
 
 ################################################## prep ###############################################
-  rm -rf -R temp ;# delete old temp directory
+#  rm -rf -R temp ;# delete old temp directory
   mkdir temp # make new temp directory
   size=$(head -n 1 $1 | grep -o '[0-9]\+')
   sed -e '1,6d'  $1 > temp/matrix.xyz # strip ersi headers
@@ -89,6 +89,6 @@ echo "Done"
 ########################################################################################################################
 echo "Generating mesh"
 sed 's/.\{4\}$//' <<< "$1" # minus 4 characters
-meshlabserver -i temp/block.xyz -o  mesh-$name.stl -s meshlab_script.mlx || /Applications/meshlab.app/Contents/MacOS/meshlabserver -i temp/block.xyz -o  mesh-$name.stl -s meshlab_script.mlx
+ meshlabserver -i temp/block.xyz -o  clean-mesh.stl -s meshlab_script.mlx || /Applications/meshlab.app/Contents/MacOS/meshlabserver -i temp/block.xyz -o  clean-mesh.stl -s meshlab_script.mlx
 ################################################### clean up ##########################################################
- rm -rf -R temp ;# delete temp directory
+ # rm -rf -R temp ;# delete temp directory
